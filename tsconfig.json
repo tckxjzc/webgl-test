@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "esnext",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports":true,
+    "sourceMap": false,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "typeRoots": [
+      "./types",
+      "node_modules/@types",
+      "node_modules/tz-library/@types"
+    ],
+    "paths": {
+      "*": [
+        "*",
+        "node_modules/*",
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "types/*",
+    "node_modules/@types/**/*",
+    "node_modules/tz-library/**/*"
+  ]
+}

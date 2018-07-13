@@ -1,0 +1,17 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "android": "4.0",
+        "ios":"9.0"
+      }
+    }],
+    "stage-0",
+    "react"
+  ],
+  "plugins": [
+    ["transform-object-assign"]
+  ],
+  "ignore": [
+  ]
+}

@@ -1,0 +1,94 @@
+@import "../../styles/theme";
+
+$bgOuter: #f7b846;
+$bgInner: #f7631a;
+$width:2px;
+/**
+animate
+ */
+@keyframes slideW{
+  0%{
+    width: 0;
+  }
+  50%{
+    width: 60%;
+  }
+  100%{
+    width: 100%;
+  }
+}
+@keyframes slideH{
+  0%{
+    height: 100%;
+  }
+  50%{
+    height: 60%;
+  }
+  100%{
+    height: 0;
+  }
+}
+/**
+common
+ */
+.container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  &>.loading{
+    display: none;
+  }
+}
+.outer{
+  background-color:rgba($bgOuter,0.9);
+}
+.inner{
+  background-color: rgba($bgInner,0.9);
+}
+/**
+top
+ */
+
+.top{
+  right: 0;
+  .outer{
+    height: $width;
+  }
+  .inner{
+    height: $width;
+    animation: slideW 2s;
+    animation-iteration-count: infinite;
+  }
+}
+/**
+left
+ */
+.left{
+  bottom: 0;
+  .outer{
+    width: $width;
+    height: 100%;
+  }
+  .inner{
+    width: $width;
+    animation: slideH 2s;
+    animation-iteration-count: infinite;
+  }
+}
+/**
+shade
+ */
+.shade{
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  background-color: rgba(247, 193, 63, 0.2);
+  &>.loading{
+    height: calc(100% - #{$width});
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f73f1b;
+  }
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0">
+    <title><%=htmlWebpackPlugin.options.title%></title>
+    <script>
+
+    </script>
+</head>
+<body>
+     <div id="container">
+
+     </div>
+     <%(htmlWebpackPlugin.options.library||[]).forEach((item)=>{%>
+        <script src="<%=item%>" crossorigin="anonymous" ></script>
+     <%})%>
+</body>
+</html>
