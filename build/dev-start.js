@@ -8,6 +8,7 @@ webpackConfig.entry.app=webpackConfig.entry.app||[];
 webpackConfig.entry.app.unshift(`webpack-dev-server/client?http://${getIp()}/`);
 let compiler = webpack(webpackConfig);
 let WebpackDevServer = require("webpack-dev-server");
+require('./server')();
 let server=new  WebpackDevServer(compiler,{
     contentBase:path.join(__dirname,'../dist'),
     host:'0.0.0.0',

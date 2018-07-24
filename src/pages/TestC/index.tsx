@@ -30,7 +30,8 @@ class TestC extends Component<Props> {
             a+=2;
 
         }
-       setInterval(ra,50)
+        ra()
+       // setInterval(ra,50)
     }
 
     componentWillUnmount() {
@@ -60,6 +61,7 @@ class TestC extends Component<Props> {
     cas = React.createRef<HTMLCanvasElement>();
 
     testA(gl: WebGLRenderingContext,rorate) {
+        rorate=0;
         gl.clearColor(0, 0, 0, 1);
         gl.clear(gl.COLOR_BUFFER_BIT);
         let vertex = new Float32Array([
@@ -73,6 +75,7 @@ class TestC extends Component<Props> {
         let a_Position = gl.getAttribLocation(gl['program'], 'a_Position');
         let u_Translation = gl.getUniformLocation(gl['program'], 'u_Translation');
         let u_xformMatrix = gl.getUniformLocation(gl['program'], 'u_xformMatrix');
+        let u_xformMatrix_Scale = gl.getUniformLocation(gl['program'], 'u_xformMatrix_Scale');
 
         let angle = rorate / 360 * 2 * Math.PI;
         let cosa = Math.cos(angle);
@@ -84,6 +87,12 @@ class TestC extends Component<Props> {
                 gl.uniformMatrix4fv(u_xformMatrix, false, new Float32Array([
                     cosa, sina, 0, 0,
                     -sina, cosa, 0, 0,
+                    0, 0, 1, 0,
+                    0, 0, 0, 1,
+                ]));
+                gl.uniformMatrix4fv(u_xformMatrix_Scale, false, new Float32Array([
+                    1.2, 0, 0, 0,
+                    0, 1.2, 0, 0,
                     0, 0, 1, 0,
                     0, 0, 0, 1,
                 ]));

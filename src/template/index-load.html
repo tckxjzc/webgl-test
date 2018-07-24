@@ -148,21 +148,6 @@
 
     </style>
     <title><%=htmlWebpackPlugin.options.title%></title>
-    <script>
-        (function () {
-            window.onerror = function (msg, url, line, col, error) {
-                new Image().src = '//up.tckxjzc.xyz/err/upload?url='
-                    + encodeURIComponent(location.href) + '&content='
-                    + encodeURIComponent(JSON.stringify({
-                        msg: msg,
-                        url: url,
-                        line: line,
-                        col: col,
-                        err: error ? error.toString() : ''
-                    }));
-            }
-        })();
-    </script>
 </head>
 <body>
 <div id="container">

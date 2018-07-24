@@ -14,7 +14,8 @@ declare var wbp:{
     dev:boolean
 };
 
-declare function initShaders(...args);
+// declare function initShaders(...args);
+
 
 type RootState={
     loading:{

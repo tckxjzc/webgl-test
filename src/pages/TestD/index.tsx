@@ -56,11 +56,12 @@ class TestD extends Component<Props> {
         let program=gl['program'];
         let a_Position= gl.getAttribLocation(program,'a_Position');
         let a_PointSize= gl.getAttribLocation(program,'a_PointSize');
+        let a_Color=gl.getAttribLocation(program,'a_Color');
         // gl.vertexAttrib1f(a_PointSize,10.0);
         let vertex = new Float32Array([
-            0, 0.5, 5,
-            0.25, 0.25, 15,
-            0.5, 0.5, 30
+            0, 0.5, 15, 1,0,1,
+            0.25, 0.25, 20, 1,1,0,
+            0.5, 0.5, 30, 0,1,0
         ]);
 
         let n=3;
@@ -69,11 +70,13 @@ class TestD extends Component<Props> {
         console.log(fsize);
         gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
         gl.bufferData(gl.ARRAY_BUFFER,vertex,gl.STATIC_DRAW);
-        gl.vertexAttribPointer(a_Position,2,gl.FLOAT,false,fsize*3,0);
-        gl.vertexAttribPointer(a_PointSize,1,gl.FLOAT,false,fsize*3,fsize*2);
+        gl.vertexAttribPointer(a_Position,2,gl.FLOAT,false,fsize*6,0);
+        gl.vertexAttribPointer(a_PointSize,1,gl.FLOAT,false,fsize*6,fsize*2);
+        gl.vertexAttribPointer(a_Color,3,gl.FLOAT,false,fsize*6,fsize*3);
         gl.enableVertexAttribArray(a_Position);
         gl.enableVertexAttribArray(a_PointSize);
-        gl.drawArrays(gl.POINTS,0,n)
+        gl.enableVertexAttribArray(a_Color);
+        gl.drawArrays(gl.TRIANGLE_STRIP,0,n)
     }
 }
 
