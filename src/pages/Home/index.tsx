@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {loadShader} from "../../webgl-tools";
 
 type Props = {
     dispatch
@@ -36,10 +37,10 @@ class Home extends Component<Props> {
         this.testB(gl);
     }
     testB(gl:WebGLRenderingContext){
-        initShaders(gl,a,b);
-        let a_Position=gl.getAttribLocation(gl['program'],'a_Position');
-        let a_PointSize=gl.getAttribLocation(gl['program'],'a_PointSize');
-        let u_FragColor=gl.getUniformLocation(gl['program'],'u_FragColor');
+        let program=loadShader(gl,a,b);
+        let a_Position=gl.getAttribLocation(program,'a_Position');
+        let a_PointSize=gl.getAttribLocation(program,'a_PointSize');
+        let u_FragColor=gl.getUniformLocation(program,'u_FragColor');
         // gl.vertexAttrib3f(a_Position,0.5,0.5,0.0);
         gl.vertexAttrib1f(a_PointSize,20.0);
 
@@ -67,10 +68,10 @@ class Home extends Component<Props> {
 
     a(gl: WebGLRenderingContext) {
 
-        initShaders(gl,a,b);
-        let a_Position=gl.getAttribLocation(gl['program'],'a_Position');
-        let a_PointSize=gl.getAttribLocation(gl['program'],'a_PointSize');
-        let u_FragColor=gl.getUniformLocation(gl['program'],'u_FragColor');
+        let program=loadShader(gl,a,b);
+        let a_Position=gl.getAttribLocation(program,'a_Position');
+        let a_PointSize=gl.getAttribLocation(program,'a_PointSize');
+        let u_FragColor=gl.getUniformLocation(program,'u_FragColor');
         gl.vertexAttrib3f(a_Position,0.5,0.5,0.0);
         gl.vertexAttrib1f(a_PointSize,20.0);
         gl.drawArrays(gl.POINTS,0,1);
