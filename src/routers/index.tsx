@@ -11,6 +11,7 @@ import {
 export default <Router history={history}>
     <Route render={({location})=>{
         return <Switch location={location}>
+            <Route path={'/g'}  component={()=><Bundle el={()=>import('pages/TestG')}/>} />
             <Route path={'/f'}  component={()=><Bundle el={()=>import('pages/TestF')}/>} />
             <Route path={'/e'}  component={()=><Bundle el={()=>import('pages/TestE')}/>} />
             <Route path={'/d'}  component={()=><Bundle el={()=>import('pages/TestD')}/>} />

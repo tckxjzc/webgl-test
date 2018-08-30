@@ -41,7 +41,7 @@ class TestF extends Component<Props> {
     /**
      *properties
      */
-    width = 600;
+    width = 500;
     height = 500;
     cas = React.createRef<HTMLCanvasElement>();
 
@@ -97,15 +97,17 @@ class TestF extends Component<Props> {
             draw(eX,eY);
         };
 
-        function draw(eX=0.25,eY=0.25){
+        function draw(eX=0.55,eY=0.25){
             let viewMatrix = new Matrix4(null);
             let projMatrix = new Matrix4(null);
-            viewMatrix
-                    .setLookAt(
-                        eX, eY, 0.25,
-                        0, 0, 0,
-                        0, 1, 0);
-            projMatrix.setOrtho(-1,1,-1,1,-2,2);
+            // viewMatrix
+            //         .setLookAt(
+            //             eX, eY, 0.25,
+            //             0, 0, 0,
+            //             0, 1, 0);
+            // projMatrix.setOrtho(-1,1,-1,1,-2,2);
+            projMatrix.setOrtho(-1.0, 1.0, -1.0, 1.0, 0.0, 2.0);
+            viewMatrix.setLookAt(eX, eY, 0.25, 0, 0, 0, 0, 1, 0);
             gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
             gl.uniformMatrix4fv(u_ProjMatrix, false, projMatrix.elements);
             let verticesColors = new Float32Array([

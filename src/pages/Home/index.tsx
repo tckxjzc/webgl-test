@@ -46,14 +46,14 @@ class Home extends Component<Props> {
 
 
         let vertex=new Float32Array([
-            0,0.5,0,
-            0.0,0.0,0,
-            0.5, 0.5,0,
+            0,2,0,1,
+            0.0,0.0,0,2,
+            0.5, 0.5,0,1
             // 0.5,0,0,
             // 1,0,0,
             // 0.5,-0.5,0,
         ]);
-        let n=vertex.length/3;
+        let n=vertex.length/4;
         initVertex();
         gl.drawArrays(gl.TRIANGLE_STRIP,0,n);
 
@@ -61,7 +61,7 @@ class Home extends Component<Props> {
             let buffer=gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
             gl.bufferData(gl.ARRAY_BUFFER,vertex,gl.STATIC_DRAW);
-            gl.vertexAttribPointer(a_Position,3,gl.FLOAT,false,0,0);
+            gl.vertexAttribPointer(a_Position,4,gl.FLOAT,false,0,0);
             gl.enableVertexAttribArray(a_Position);
         }
     }
