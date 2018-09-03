@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "tckxjzc",
   "license": "MIT",
+  "scripts": {
+    "start": "node build/dev-start.js",
+    "build": "node build/build.js"
+  },
   "devDependencies": {
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",

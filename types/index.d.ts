@@ -2,6 +2,14 @@ declare module '*.scss' {
     const content: {[className: string]: string};
     export = content;
 }
+declare module '*.frag' {
+    const content: string;
+    export = content;
+}
+declare module '*.vert' {
+    const content: string;
+    export = content;
+}
 declare module '*.txt' {
     const content: string;
     export = content;
