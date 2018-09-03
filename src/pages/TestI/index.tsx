@@ -47,23 +47,31 @@ class TestI extends Component<Props> {
         gl.clear(gl.COLOR_BUFFER_BIT);
 
         gl.enable(gl.DEPTH_TEST);
+
+
+        const u_Matrix=gl.getUniformLocation(program,'u_Matrix');
+        let matrix=new Matrix4(null);
+        matrix.setPerspective(30, 1, 1, 100);
+        matrix.lookAt(7, 7, 7, 0, 0, 0, 0, 1, 0);
+        gl.uniformMatrix4fv(u_Matrix,false,matrix.elements);
+
         initVertextBuffer(gl);
-        initIndexBuffer(gl);
-        gl.drawElements(gl.TRIANGLES,36,gl.UNSIGNED_BYTE,0);
+        let n=initIndexBuffer(gl);
+        gl.drawElements(gl.TRIANGLES,n,gl.UNSIGNED_BYTE,0);
 
         function initVertextBuffer(gl:WebGLRenderingContext) {
-            let u=0.5;
+            let u=1;
             const vertex=new Float32Array([
                 //正面四个顶点
                 -u,u,u,1,1,1,//左上
-                u,u,u,0.5,0.5,0.5//右上
-                -u,-u,u,0.4,0.6,0.9,//左下
-                u,-u,u,1,1,0.5,//右下
+                u,u,u,0.5,0.5,0.5,//右上
+                u,-u,u,0.4,0.6,0.9,//左下
+                -u,-u,u,1,1,0.5,//右下
                 //背面四个顶点，
                 -u,u,-u,0.6,0.1,0.8,//左上
                 u,u,-u,0.8,0.1,1,//右上
-                -u,-u,-u,0,1,0.5,//左下
-                u,-u,-u,1,0,0.3//右下
+                u,-u,-u,0,1,0.5,//左下
+                -u,-u,-u,1,0,0.3//右下
             ]);
             const buffer=gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
@@ -80,12 +88,12 @@ class TestI extends Component<Props> {
         function  initIndexBuffer(gl:WebGLRenderingContext){
             const index=gl.createBuffer();
             const indices=new Uint8Array([
-                0,1,2,1,2,3,
-                4,5,6,5,6,7,
-                0,1,4,1,4,5,
-                3,7,2,7,2,6,
-                1,2,6,2,6,5,
-                0,3,7,3,7,4
+                0,2,1,0,2,3,
+                4,6,5,4,6,7,
+                0,5,1,0,5,4,
+                3,6,2,3,6,7,
+                3,4,0,3,4,7,
+                2,5,1,2,5,6
             ]);
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,index);
             gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,indices,gl.STATIC_DRAW);
