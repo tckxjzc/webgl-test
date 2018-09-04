@@ -93,14 +93,14 @@ class TestI extends Component<Props> {
             const vertex=new Float32Array([
                 //正面四个顶点
                 -u,u,u,1,1,1,//左上
-                u,u,u,0.5,0.5,0.5,//右上
-                u,-u,u,0.4,0.6,0.9,//左下
-                -u,-u,u,1,1,0.5,//右下
+                u,u,u,1,1,1,//右上
+                u,-u,u,1,1,1,//左下
+                -u,-u,u,1,1,1,//右下
                 //背面四个顶点，
-                -u,u,-u,0.6,0.1,0.8,//左上
-                u,u,-u,0.8,0.1,1,//右上
-                u,-u,-u,0,1,0.5,//左下
-                -u,-u,-u,1,0,0.3//右下
+                -u,u,-u,1,1,1,//左上
+                u,u,-u,1,1,1,//右上
+                u,-u,-u,1,1,1,//左下
+                -u,-u,-u,1,1,1,//右下
             ]);
             const buffer=gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
@@ -113,7 +113,7 @@ class TestI extends Component<Props> {
             gl.enableVertexAttribArray(a_Color);
 
         }
-
+        new Vector3(null);
         function  initIndexBuffer(gl:WebGLRenderingContext){
             const index=gl.createBuffer();
             const indices=new Uint8Array([
