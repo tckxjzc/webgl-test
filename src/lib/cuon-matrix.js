@@ -366,7 +366,7 @@ Matrix4.prototype.setPerspective = function(fovy, aspect, near, far) {
     throw 'far <= 0';
   }
 
-  fovy = Math.PI * fovy / 180 / 2;
+  fovy = Math.PI * fovy / 180;
   s = Math.sin(fovy);
   if (s === 0) {
     throw 'null frustum';

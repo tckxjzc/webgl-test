@@ -162,10 +162,10 @@
     </div>
 </div>
 
-<script src="http://localhost:3000/lib/webgl-utils.js" ></script>
-<script src="http://localhost:3000/lib/webgl-debug.js" ></script>
-<script src="http://localhost:3000/lib/cuon-utils.js" ></script>
-<script src="http://localhost:3000/lib/cuon-matrix.js" ></script>
+<script src="/lib/webgl-utils.js" ></script>
+<script src="/lib/webgl-debug.js" ></script>
+<script src="/lib/cuon-utils.js" ></script>
+<script src="/lib/cuon-matrix.js" ></script>
 
 <%(htmlWebpackPlugin.options.library||[]).forEach((item)=>{%>
 <script crossorigin='anonymous' src="<%=item%>"></script>

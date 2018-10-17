@@ -29,6 +29,33 @@ class TestD extends Component<Props> {
 
     render() {
         return <React.Fragment>
+            <div style={{
+                position:'absolute',
+                zIndex:100,
+                top:0,
+                left:0,
+                width:this.width,
+                height:this.height,
+                // backgroundColor:'#ff0',
+                backgroundColor:'rgba(0,0,0,0)'
+            }}>
+                <div style={{
+                    position:'absolute',
+                    top:this.width/2,
+                    left:0,
+                    width:this.width,
+                    height:1,
+                    backgroundColor:'#33ff54'
+                }}/>
+                <div style={{
+                    position:'absolute',
+                    left:this.height/2,
+                    top:0,
+                    width:1,
+                    height:this.height,
+                    backgroundColor:'#33ff54'
+                }}/>
+            </div>
             <canvas
                 style={{backgroundColor:'#ee0'}}
                 ref={this.cas}
@@ -60,7 +87,7 @@ class TestD extends Component<Props> {
         // gl.vertexAttrib1f(a_PointSize,10.0);
         let vertex = new Float32Array([
             0, 0.5, 15, 1,0,1,
-            0.25, 0.25, 20, 1,1,0,
+            -0.15, 0.0,20, 1,1,0,
             0.5, 0.5, 30, 0,1,0
         ]);
 
@@ -77,6 +104,7 @@ class TestD extends Component<Props> {
         gl.enableVertexAttribArray(a_PointSize);
         gl.enableVertexAttribArray(a_Color);
         gl.drawArrays(gl.TRIANGLE_STRIP,0,n)
+        // gl.drawArrays(gl.POINTS,0,n)
     }
 }
 

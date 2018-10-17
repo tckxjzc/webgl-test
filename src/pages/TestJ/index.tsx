@@ -5,6 +5,9 @@ import {loadShader} from '../../webgl-tools'
 
 type Props = {};
 
+/**
+ * 光照
+ */
 class TestI extends Component<Props> {
     /**
      * lifecycle
@@ -27,7 +30,7 @@ class TestI extends Component<Props> {
 
     render() {
         return <div>
-            <canvas ref={this.canvas} width={this.width} height={this.height} style={{backgroundColor: '#befcff'}}>
+            <canvas ref={this.canvas} width={this.width} height={this.height} style={{backgroundColor: '#ffffff'}}>
                 not support
             </canvas>
         </div>
@@ -44,39 +47,70 @@ class TestI extends Component<Props> {
      */
     start=(gl:WebGLRenderingContext)=>{
         const program:WebGLProgram=loadShader(gl,vertex,frag);
-        gl.clearColor(0,0,0.1,0.5);
+        gl.clearColor(0.9,0.9,0.9,1);
         gl.clear(gl.COLOR_BUFFER_BIT);
 
         gl.enable(gl.DEPTH_TEST);
 
 
-        let eY = 7;
-        let eX = 7;
-        document.body.onkeydown = function (e) {
-            // console.log( e.code);
-            switch (e.code) {
+        let eY=7;
+        let eX=7;
+        let eZ=7;
+        let angle=10;
+        document.body.onkeydown=function (e) {
+            console.log( e.code);
+            let x=eX,y=eY,z=eZ;
+            switch (e.code){
                 case 'ArrowUp':
-                    eY += 0.2;
+                    eY+=0.2;
+                    eZ+=0.2;
+                    eX+=0.2;
                     break;
                 case 'ArrowDown':
-                    eY -= 0.2;
-                    break;
+                    (function () {
+                        let a=angle/180*Math.PI;
+                        let cosA=Math.cos(a);
+                        let sinA=Math.sin(a);
+                        x=eX*cosA-eZ*sinA;
+                        z=eX*sinA+eZ*cosA;
+                        angle+=10;
+                        draw(x,y,z)
+                    })();
+                    return;
                 case 'ArrowLeft':
-                    eX -= 0.2;
-                    break;
+                    (function () {
+                        let a=angle/180*Math.PI;
+                        let cosA=Math.cos(a);
+                        let sinA=Math.sin(a);
+                        y=eY*cosA-eZ*sinA;
+                        z=eY*sinA+eZ*cosA;
+                        angle+=10;
+                        draw(x,y,z)
+                    })();
+                    return;
                 case 'ArrowRight':
-                    eX += 0.2;
-                    break;
+
+                    (function () {
+                        let a=angle/180*Math.PI;
+                        let cosA=Math.cos(a);
+                        let sinA=Math.sin(a);
+                        x=eX*cosA-eY*sinA;
+                        y=eX*sinA+eY*cosA;
+                        angle+=10;
+                        draw(x,y,z)
+                    })();
+                    return;
             }
-            draw(eX, eY);
+            draw(eX,eY,eZ);
+
         };
 
-        function draw(x = 7, y = 7) {
+        function draw(x = 7, y = 7,z=7) {
             const u_Matrix = gl.getUniformLocation(program, 'u_Matrix');
             let matrix = new Matrix4(null);
             matrix.setPerspective(30, 1, 1, 100);
             // matrix.setOrtho(-1,1,-1,1,-20,20)
-            matrix.lookAt(x, y, 7, 0, 0, 0, 0, 1, 0);
+            matrix.lookAt(x, y, z, 0, 0, 0   , 1, 0, 0);
             gl.uniformMatrix4fv(u_Matrix, false, matrix.elements);
             gl.clear(gl.COLOR_BUFFER_BIT);
             gl.drawElements(gl.TRIANGLES, n, gl.UNSIGNED_BYTE, 0);
@@ -88,9 +122,9 @@ class TestI extends Component<Props> {
 
         const u_LightColor = gl.getUniformLocation(program, 'u_LightColor');
         const u_LightDirection = gl.getUniformLocation(program, 'u_LightDirection');
-        gl.uniform3f(u_LightColor,1,1,1);
-        const lightDirection=new Vector3([0.5,3,4]);
-        lightDirection.normalize();
+        gl.uniform3f(u_LightColor,0,1,0);
+        const lightDirection=new Vector3([4,4,7]);
+        // lightDirection.normalize();
         gl.uniform3fv(u_LightDirection,lightDirection.elements);
         const normals = new Float32Array([    // Normal
             0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0,  // v0-v1-v2-v3 front

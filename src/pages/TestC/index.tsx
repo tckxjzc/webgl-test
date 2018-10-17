@@ -21,16 +21,15 @@ class TestC extends Component<Props> {
         let canvas = this.cas.current;
         const gl = canvas.getContext('webgl');
         // if(gl instanceof WebGLRenderingContext)
-
-
         let __this=this;
         let a=0;
         function ra() {
             __this.testA(gl,a);
             a+=2;
-
+            requestAnimationFrame(ra)
         }
-        ra()
+        requestAnimationFrame(ra)
+       //  ra()
        // setInterval(ra,50)
     }
 
@@ -40,6 +39,33 @@ class TestC extends Component<Props> {
 
     render() {
         return <React.Fragment>
+            <div style={{
+                position:'absolute',
+                zIndex:100,
+                top:0,
+                left:0,
+                width:this.width,
+                height:this.height,
+                // backgroundColor:'#ff0',
+                backgroundColor:'rgba(0,0,0,0)'
+            }}>
+                <div style={{
+                    position:'absolute',
+                    top:this.width/2,
+                    left:0,
+                    width:this.width,
+                    height:1,
+                    backgroundColor:'#33ff54'
+                }}/>
+                <div style={{
+                    position:'absolute',
+                    left:this.height/2,
+                    top:0,
+                    width:1,
+                    height:this.height,
+                    backgroundColor:'#33ff54'
+                }}/>
+            </div>
             <canvas
                 ref={this.cas}
                 width={this.width}
@@ -61,12 +87,12 @@ class TestC extends Component<Props> {
     cas = React.createRef<HTMLCanvasElement>();
 
     testA(gl: WebGLRenderingContext,rorate) {
-        rorate=0;
+        // rorate=0;
         gl.clearColor(0, 0, 0, 1);
         gl.clear(gl.COLOR_BUFFER_BIT);
         let vertex = new Float32Array([
             0, 0.5, 0,
-            0.25, 0.25, 0,
+            0, 0, 0,
             0.5, 0.5, 0,
         ]);
         let size = 3;
@@ -91,10 +117,10 @@ class TestC extends Component<Props> {
                     0, 0, 0, 1,
                 ]));
                 gl.uniformMatrix4fv(u_xformMatrix_Scale, false, new Float32Array([
-                    1.2, 0, 0, 0,
-                    0, 1.2, 0, 0,
-                    0, 0, 1, 0,
-                    0, 0, 0, 1,
+                    1.5, 0,   0, 0,
+                    0,  1.5,  0, 0,
+                    0,   0,   1, 0,
+                    0,   0,   0, 1,
                 ]));
                 break;
             case 2:

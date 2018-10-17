@@ -6,6 +6,9 @@ type Props = {};
 const vert=require('./a.vert');
 const frag=require('./b.frag');
 // console.log(frag)
+/**
+ * 纹理demo
+ */
 class TestE extends Component<Props> {
     /**
      * lifecycle
@@ -42,8 +45,8 @@ class TestE extends Component<Props> {
     /**
      *properties
      */
-    width=750;
-    height=750;
+    width=640;
+    height=640;
     cas=React.createRef<HTMLCanvasElement>();
     /**
      *method
@@ -53,12 +56,12 @@ class TestE extends Component<Props> {
         gl.clearColor(0,0,0,1);
         gl.clear(gl.COLOR_BUFFER_BIT);
         initShaders(gl,vert,frag);
-
+        let a=2;
         let vertex=wbp.dev?new Float32Array([
-            -0.8,0.8,0,1,
+            -0.8,0.8,0,a,
             -0.8,-0.8,0,0,
-            0.8,0.8,1,1,
-            0.8,-0.8,1,0
+            0.8,0.8,a,a,
+            0.8,-0.8,a,0
         ]):new Float32Array([
             -0.8,0.8,-0.3,2.7, //4
             -0.8,-0.8,-0.3,-0.3,//3
@@ -73,6 +76,8 @@ class TestE extends Component<Props> {
         let program=gl['program'];
         let a_Position=gl.getAttribLocation(program,'a_Position');
         let a_TexCoord=gl.getAttribLocation(program,'a_TexCoord');
+        let u_RotateMat=gl.getUniformLocation(program,'u_RotateMat');
+        gl.uniformMatrix4fv(u_RotateMat,false,new Matrix4(null).setRotate(45,1,1,0).elements)
         gl.vertexAttribPointer(a_Position,2,gl.FLOAT,false,FSIZE*4,0);
         gl.vertexAttribPointer(a_TexCoord,2,gl.FLOAT,false,FSIZE*4,FSIZE*2);
         gl.enableVertexAttribArray(a_Position);
@@ -101,8 +106,12 @@ class TestE extends Component<Props> {
 
             //配置纹理参数
             // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);//设置成水平和垂直拉伸
+            // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);//设置成水平和垂直拉伸
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT);//设置成水平和垂直拉伸
             // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);//设置成水平和垂直拉伸
-            gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT);//设置成水平和垂直拉伸
+            gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);//缩小
+            // gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);//放大
             //配置纹理图像
             gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,image);
             //将0号纹理传递给着色器
