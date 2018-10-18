@@ -43,7 +43,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(txt|glsl|vert|frag)$/,
+                test: /\.(txt|glsl|vert|frag|obj|mtl)$/,
                 use: 'raw-loader'
             },
             {
