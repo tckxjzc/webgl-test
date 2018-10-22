@@ -11,6 +11,7 @@ import {
 export default <Router history={history}>
     <Route render={({location})=>{
         return <Switch location={location}>
+            <Route path={'/texture/a'}  component={()=><Bundle el={()=>import('exercise/textureA')}/>} />
             <Route path={'/l'}  component={()=><Bundle el={()=>import('pages/TestL')}/>} />
             <Route path={'/k'}  component={()=><Bundle el={()=>import('pages/TestK')}/>} />
             <Route path={'/j'}  component={()=><Bundle el={()=>import('pages/TestJ')}/>} />

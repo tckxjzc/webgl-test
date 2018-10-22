@@ -12,6 +12,7 @@ import 'styles/base.global.scss';
 import 'tz-library/style/base.scss';
 import 'tz-library/style/mobile.media.scss';
 import xhttp from "./net/xhttp";
+import BoxGeometry from "./common/BoxGeometry";
 
 /**
  * start
@@ -20,7 +21,4 @@ render(<Provider store={store}>
         <App/>
     </Provider>,
     document.getElementById('container'));
-
-
-
 
