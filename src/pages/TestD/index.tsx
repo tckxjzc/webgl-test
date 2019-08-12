@@ -86,9 +86,9 @@ class TestD extends Component<Props> {
         let a_Color=gl.getAttribLocation(program,'a_Color');
         // gl.vertexAttrib1f(a_PointSize,10.0);
         let vertex = new Float32Array([
-            0, 0.5, 15, 1,0,1,
+            0, 0.5, 10, 1,0,1,
             -0.15, 0.0,20, 1,1,0,
-            0.5, 0.5, 30, 0,1,0
+            0.5, 1.03, 30, 0,1,0
         ]);
 
         let n=3;
@@ -103,8 +103,8 @@ class TestD extends Component<Props> {
         gl.enableVertexAttribArray(a_Position);
         gl.enableVertexAttribArray(a_PointSize);
         gl.enableVertexAttribArray(a_Color);
-        gl.drawArrays(gl.TRIANGLE_STRIP,0,n)
-        // gl.drawArrays(gl.POINTS,0,n)
+        // gl.drawArrays(gl.TRIANGLE_STRIP,0,n)
+        gl.drawArrays(gl.POINTS,0,n)
     }
 }
 

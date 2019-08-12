@@ -1,6 +1,6 @@
 process.env.tz_env='dev';
 let getIp=require('../config/get-ip');
-let port=8070;
+let port=8073;
 let webpack = require('webpack');
 let path=require('path');
 let webpackConfig = require('../webpack.config');
